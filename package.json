@@ -1,0 +1,23 @@
+{
+  "name": "testdemo",
+  "version": "1.0.0",
+  "description": "描述",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/guojianlan/testdemo.git"
+  },
+  "author": "guojian",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/guojianlan/testdemo/issues"
+  },
+  "homepage": "https://github.com/guojianlan/testdemo",
+  "dependencies": {
+    "ejs": "^2.3.1",
+    "hapi": "^8.4.0"
+  }
+}
