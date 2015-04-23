@@ -19,6 +19,8 @@
   "dependencies": {
     "boom": "^2.7.1",
     "ejs": "^2.3.1",
+    "gulp": "^3.8.11",
+    "gulp-webpack": "^1.4.0",
     "hapi": "^8.4.0"
   }
 }

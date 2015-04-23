@@ -24,3 +24,15 @@ module.exports.imgFile = function(req, rep) {
 	var isExit = fs.existsSync(absPath);
 	return isExit ? rep.file(absPath) : rep(Boom.notFound('missing'));
 };
+module.exports.jsFile = function(req, rep) {
+	var jsPath = req.params.jsPath;
+	var absPath = Path.join(__dirname, '../assets/js/' + jsPath);
+	var isExit = fs.existsSync(absPath);
+	if(isExit){
+		if(jsPath.match(/vendor/g)){
+			return rep.file(absPath);
+		}
+	}else{
+		return rep(Boom.notFound('missing'));
+	}
+};

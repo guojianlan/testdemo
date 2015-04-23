@@ -12,5 +12,9 @@ module.exports = function(server) {
 		method: 'GET',
 		path: '/img/{imgPath*}',
 		handler: routesController.imgFile
+	}, {
+		method: 'GET',
+		path: '/js/{jsPath*}',
+		handler: routesController.jsFile
 	}]);
 }
