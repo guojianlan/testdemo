@@ -4,7 +4,7 @@
 -------------------
 * (1) 创建文件目录assets(里面有js,img,css,font),views(html文件),routes(路由初始化)，routesController(路由控制器),增加入口文件index.js,
 * (2) 安装hapi, npm install hapi --save ,如果安装到全局，npm install hapi -g
-2.index.js文件编写
+2. index.js文件编写
 -------------------
 ```
 var Hapi = require('hapi');
