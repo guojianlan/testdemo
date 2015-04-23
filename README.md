@@ -36,6 +36,14 @@ module.exports = function(server) {
 		method: 'GET',
 		path: '/{htmlPath*}', //访问地址参数
 		handler: routesController.htmlFile //执行routesController.static.htmlFile方法
+	}, {
+		method: 'GET',
+		path: '/css/{cssPath*}',//访问css地址参数
+		handler: routesController.cssFile //执行routesController.static.cssFile方法
+	}, {
+		method: 'GET',
+		path: '/img/{imgPath*}',//访问img地址参数
+		handler: routesController.imgFile //执行routesController.static.imgFile方法
 	}]);
 }
 ```
@@ -60,6 +68,23 @@ module.exports.htmlFile=function(req,rep){  //向index.js抛出htmlFile方法，
 	var absPath = Path.join(__dirname,'../views/'+htmlPath); // 获取访问地址的文件
 	var isExit = fs.existsSync(absPath); // 返回能否读取到文件
 	return isExit ? rep.view(htmlPath) : rep(Boom.notFound('missing')); // 如果读取到文件则使用hapi.view(),输出到页面上，否则使用boom抛出异常
-}
+};
+module.exports.cssFile = function(req, rep) {
+	var cssPath = req.params.cssPath; // 得到路由传过来得cssPath
+	var absPath = Path.join(__dirname, '../assets/css/' + cssPath);// 获取访问地址的文件
+	var isExit = fs.existsSync(absPath);// 返回能否读取到文件
+	if (isExit) {
+		var ReadStream = fs.createReadStream(absPath);
+		return rep(ReadStream).type('text/css; charset=utf-8');
+	} else {
+		return rep(Boom.notFound('missing'))使用boom抛出异常
+	}
+};
+module.exports.imgFile = function(req, rep) {
+	var imgPath = req.params.imgPath; // 得到路由传过来得imgPath
+	var absPath = Path.join(__dirname, '../assets/img/' + imgPath);// 获取访问地址的文件
+	var isExit = fs.existsSync(absPath);// 返回能否读取到文件
+	return isExit ? rep.file(absPath) : rep(Boom.notFound('missing')); // 如果读取到文件则使用hapi.file(),输出到页面上，否则使用boom抛出异常
+};
 ```
 -------------------

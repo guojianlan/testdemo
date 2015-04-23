@@ -4,5 +4,13 @@ module.exports = function(server) {
 		method: 'GET',
 		path: '/{htmlPath*}',
 		handler: routesController.htmlFile
+	}, {
+		method: 'GET',
+		path: '/css/{cssPath*}',
+		handler: routesController.cssFile
+	}, {
+		method: 'GET',
+		path: '/img/{imgPath*}',
+		handler: routesController.imgFile
 	}]);
 }
