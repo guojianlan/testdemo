@@ -62,3 +62,9 @@ module.exports.jsFile = function(req, rep) {
 		return rep(Boom.notFound('missing'));
 	}
 };
+module.exports.packFile = function(req, rep) {
+	var filePath = req.params.filePath;
+	var absPath = Path.join(__dirname, '../dist/' + filePath);
+	var isExit = fs.existsSync(absPath);
+	return isExit ? rep.file(absPath) : rep(Boom.notFound('missing'));
+}

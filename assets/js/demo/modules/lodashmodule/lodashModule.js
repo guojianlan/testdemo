@@ -1,6 +1,6 @@
 var _ = require('lodash');
 var $ =require('jquery');
-var lodashtemplate = require('html!./lodashdemo.html')
+var lodashtemplate = require('html!./lodashdemo.html');
 var lodashModule = module.exports = function(){
 	this.init();
 };

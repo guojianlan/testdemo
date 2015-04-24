@@ -221,3 +221,67 @@ p.afterRender=function(){
 
 ```
 -------------------
+10. 引入gulp构建项目 npm install gupe --save
+-------------------
+* (1) 创建文件，testdemo/gulpfile.js
+
+```
+var gulp = require('gulp'); //引入基础库gulp 
+var webpack = require('gulp-webpack');//引入gulp-webpack,一个使用command规范的模块工具 
+var rename = require('gulp-rename'); //引入gulp-rename,更改名字
+var rimraf = require('rimraf'); // 引入rimraf,处理文件夹
+var imgmin = require('gulp-imagemin'); // 引入gulp-imagemin,处理图片
+var concat = require('gulp-concat'); // 引入gulp-concat ,处理文件合并
+var minifyCss = require('gulp-minify-css'); //引入gulp-minify-css,处理css最小化
+var uglify = require('gulp-uglify'); //引入gulp-uglisy,代码丑化
+var fs = require('fs');
+var rev = require('gulp-rev');// 引入文件版本控制
+gulp.task('clear', function() { // 创建gulp任务（clear）,删除dist下的所有文件
+	rimraf('./dist', function() {
+		console.log('clear success');
+	});
+});
+gulp.task('demo', function() { // 创建gulp任务（demo）
+	rimraf('./dist', function() { //删除dist文件夹下面的使用内容
+		gulp.src(['./assets/img/demo/*']) // 找到assets/img/demo/下面的所有文件
+			.pipe(imgmin({ // 优化图片
+				optimizationLevel: 3,
+				progressive: true,
+				interlaced: true
+			}))
+			.pipe(gulp.dest('./dist/img/demo/')); // 生成到dist/img/demo下面
+
+		gulp.src(['./assets/css/demo/*.css', './assets/css/common/*.css']) //找到assets/css/demo下面的css和assets/css/common下面的css
+			.pipe(concat('demo.min.css')) // 合并，并且命名为demo.min.css
+			.pipe(minifyCss()) //最小化css
+			.pipe(gulp.dest('./dist/css/demo/')); // 生成在dist/css/demo文件下
+
+		gulp.src(['./assets/js/vendor/*.js']) // 找到assets/js/vendor下面的所有js
+		.pipe(uglify()) //丑化里面的代码
+		.pipe(gulp.dest('./dist/js/vendor/')); //生成到dist/js/vendor下面
+
+		if(fs.existsSync('./assets/js/demo/index.js')){ // 判断assets/js/demo/index.js是否存在
+			gulp.src('./assets/js/demo/index.js') // 找到assets/js/demo/index.js
+			.pipe(webpack()) //使用webpack打包
+			.pipe(rename('index.min.js')) //更改文件名为index.min.js
+			.pipe(uglify()) // 代码丑化
+			.pipe(gulp.dest('./dist/js/demo/')); // 生成在dist/js/demo
+		}
+	});
+});
+gulp.task('demo-rev', function() { // 创建gulp任务（demo-rev）
+  // rev version
+  	gulp.src(['./dist/js/demo/*.js', './dist/css/demo/*.css'], { // 找到dist/js/demo下面的所有js,和dist/css/demo下面的所有css
+      base: './dist' 
+    })
+    .pipe(rev()) //增加版本
+    .pipe(gulp.dest('./dist'))
+    .pipe(rev.manifest('./dist/manifest.json', {
+      base: './dist' //生成mainfest.json
+    }))
+    .pipe(gulp.dest('./dist'));放在dist目录下
+});
+
+
+```
+-------------------

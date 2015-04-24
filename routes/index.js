@@ -16,5 +16,9 @@ module.exports = function(server) {
 		method: 'GET',
 		path: '/js/{jsPath*}',
 		handler: routesController.jsFile
+	},{
+		method: 'GET',
+		path: '/dist/{filePath*}',
+		handler: routesController.packFile
 	}]);
 }
