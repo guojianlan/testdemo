@@ -176,3 +176,48 @@ p.init = function(){
 
 ```
 -------------------
+10. 引入lodash和html-loader npm install lodash html-loader --save
+-------------------
+* (1) 创建文件，在assets/js/demo/module/lodashmodule/lodashModule.js // 要往indexmodule.js添加var lodashModule=require('./lodashmodule/lodashModule'); 然后new lodashModule();
+```
+var _ = require('lodash'); // 引入lodash
+var $ =require('jquery'); // 引入jquery
+var lodashtemplate = require('html!./lodashdemo.html'); // 使用html-loader 引入lodashdemo.html
+var lodashModule = module.exports = function(){ 
+	this.init(); //调用init
+};
+
+var p = lodashModule.prototype;
+
+p.init=function(){
+	console.log('goto render');
+	this.render(); // 调用render
+};
+
+p.render = function(){
+	if(_.isFunction(this.beforeRender)) this.beforeRender(); // 使用loadsh的isFunction 判断是否是function 调用beforeRender
+	if(_.isFunction(this.afterRender)) this.afterRender();// 使用loadsh的isFunction 判断是否是function afterRender
+};
+
+p.beforeRender=function(){
+	console.log('goto templateRender');
+	this.templateRender(); // 调用templateRender
+};
+p.templateRender = function(){
+	var compiled = _.template(lodashtemplate); // 使用lodash的template方法，解释出文件
+	$('div').append(compiled({
+		test:111
+	})); // 往div里面添加元素，并把 test 传给lodashdemo.html
+}
+
+p.afterRender=function(){
+	console.log('render end');
+};
+
+```
+* (2) 创建文件，在assets/js/demo/module/lodashmodule/lodashdemo.html
+```
+<div><%= test%></div> 把js里面传过来的test 写到文件中
+
+```
+-------------------
