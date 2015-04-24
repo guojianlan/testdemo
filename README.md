@@ -44,6 +44,10 @@ module.exports = function(server) {
 		method: 'GET',
 		path: '/img/{imgPath*}',//访问img地址参数
 		handler: routesController.imgFile //执行routesController.static.imgFile方法
+	}, {
+		method: 'GET',
+		path: '/js/{jsPath*}',//访问js地址参数
+		handler: routesController.jsFile//执行routesController.static.jsFile方法
 	}]);
 }
 ```
@@ -63,6 +67,9 @@ module.exports={
 var Path = require('path'); // 引入node里面的path模块
 var fs = require('fs'); //引入node里面的fs(文件操作模块) https://nodejs.org/api/fs.html
 var Boom = require('boom'); //npm install boom --save 引入错误处理机制
+var gulp = require('gulp'); //引入gulp插件
+var rimraf = require('gulp-rimraf'); // 引入gulp-rimraf 插件，操作文件夹
+var jsxLoader = require('jsx-loader'); // 引入jsx-loader插件，以便webpack读取jsx文件时使用
 module.exports.htmlFile=function(req,rep){  //向index.js抛出htmlFile方法，接收request(请求),response（响应）
 	var htmlPath = req.params.htmlPath; // 得到路由传过来得htmlPath
 	var absPath = Path.join(__dirname,'../views/'+htmlPath); // 获取访问地址的文件
@@ -85,6 +92,38 @@ module.exports.imgFile = function(req, rep) {
 	var absPath = Path.join(__dirname, '../assets/img/' + imgPath);// 获取访问地址的文件
 	var isExit = fs.existsSync(absPath);// 返回能否读取到文件
 	return isExit ? rep.file(absPath) : rep(Boom.notFound('missing')); // 如果读取到文件则使用hapi.file(),输出到页面上，否则使用boom抛出异常
+};
+module,exports.jsFile = function(req,rep){
+	var jsPath = req.params.jsPath;// 得到路由传过来得jsPath
+	var absPath = Path.join(__dirname,'../assets/js/'+jsPath);// 获取访问地址的文件
+	var desPath = Path.join(__dirname,'../assets/js/'+jsPath.replace(/\.js/g,'.dev.js'));//生成dev.js
+	var isExit = fs.existsSync(absPath);// 返回能否读取到文件
+	if(isExit){
+		if(jsPath.match(/vender/g)){ 
+			return rep.file(absPath) // 如果读取的是vender路径,则直接输出文件
+		}
+		gulp.src(desPath).pipe(rimraf()); //删除dev.js 文件
+		var gulpStream = gule.src(abspath)
+		.pipe(webpack({
+			module:{
+				loaders:[{
+						test: /\.jsx$/, // webpack 配置,当使用.jsx的时候，使用jsx-loader编译
+						loader: 'jsx-loader?insertPragma=React.DOM&harmony'
+					}]		
+			},
+			debug: true, 使用debug
+			devtool: '#eval', // 使用veal 开头
+			resolve: {
+				extensions: ['', '.js', '.jsx'] // 用于指明程序自动补全识别哪些后缀
+			}
+		}))
+		.pipe(rename(Path.basename(desPath))) //使用当前文件路径为文件名
+		.once('data',function(file){ 
+			rep(file.contents).type('application/javascript'); // 读取一次文件并使用js生成
+		});
+	}else{
+		rep(Boom.notFound('missing'));使用boom抛出异常
+	}
 };
 ```
 -------------------
