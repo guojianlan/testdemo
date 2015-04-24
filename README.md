@@ -70,6 +70,7 @@ var Boom = require('boom'); //npm install boom --save 引入错误处理机制
 var gulp = require('gulp'); //引入gulp插件
 var rimraf = require('gulp-rimraf'); // 引入gulp-rimraf 插件，操作文件夹
 var jsxLoader = require('jsx-loader'); // 引入jsx-loader插件，以便webpack读取jsx文件时使用
+var rename = require('gulp-rename'); //引入gulp-rename,改名字
 module.exports.htmlFile=function(req,rep){  //向index.js抛出htmlFile方法，接收request(请求),response（响应）
 	var htmlPath = req.params.htmlPath; // 得到路由传过来得htmlPath
 	var absPath = Path.join(__dirname,'../views/'+htmlPath); // 获取访问地址的文件
@@ -125,5 +126,53 @@ module,exports.jsFile = function(req,rep){
 		rep(Boom.notFound('missing'));使用boom抛出异常
 	}
 };
+```
+-------------------
+6. assets/js/demo/index.js文件编写
+-------------------
+```
+require('./config'); // 引入当前文件夹config.js
+```
+-------------------
+7. assets/js/demo/config.js文件编写
+-------------------
+```
+require('./modules'); 引入当前文件夹modules/index.js
+```
+-------------------
+8. assets/js/demo/modules/index.js文件编写
+-------------------
+```
+require('./indexmodule')(); //执行当前文件夹下面的indexmodule
+```
+-------------------
+9. assets/js/demo/modules/indexmodule.js文件编写
+-------------------
+```
+var testmodule = require('./test/testmodule'); //引入当前文件夹下面的/test/testmodule.js
+var indexmodule = module.exports = function(){
+	(function(){
+		indexmodule.init(); //函数自执行
+	})();
+	return indexmodule;
+};
+indexmodule.init = function(){
+	console.log(123123123); //输出123131332
+	new testmodule(); new testmodule实例
+};
+```
+-------------------
+9. assets/js/demo/modules/test/testmodule.js文件编写
+-------------------
+```
+var testmodule = module.exports = function(){
+	this.init(); //new 实例的时候执行init,输出woca
+};
+var p = testmodule.prototype;
+
+p.init = function(){
+	console.log('woca');
+}
+
 ```
 -------------------
