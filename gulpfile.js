@@ -53,3 +53,5 @@ gulp.task('demo-rev', function() {
     }))
     .pipe(gulp.dest('./dist'));
 });
+
+gulp.task('default',['demo']);
