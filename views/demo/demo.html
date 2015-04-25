@@ -1,13 +1,24 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" ng-app='test'>
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
-	<link rel="stylesheet" href="http://127.0.0.1:3000/dist/css/demo/demo.min.css">
+	<link rel="stylesheet" href="http://127.0.0.1:3000/css/demo/index.css">
 </head>
 <body>
 	<div>1</div>
 	<div> <img src="http://127.0.0.1:3000/img/demo/cm-icon.png" alt="ss"></div>
-	<script src='http://127.0.0.1:3000/dist/js/demo/index.min.js'></script>
+	<span>{{2+1}}</span>
+	    <div ng-controller='testController'>
+         <div ng-repeat='item in items'>
+            <span >{{item.title}}</span>
+            <input type="text" ng-model='item.quantity'>
+            <span>{{item.price | currency}}</span>
+            <span>{{item.price *item.quantity | currency}}</span>
+            <button ng-click='remove($index)'>Remove</button>
+            <button ng-click='tanchu($index)'>Click</button>
+        </div>
+    </div>
+	<script src='http://127.0.0.1:3000/js/demo/index.js'></script>
 </body>
 </html>

@@ -285,3 +285,84 @@ gulp.task('demo-rev', function() { // 创建gulp任务（demo-rev）
 
 ```
 -------------------
+11.使用angular.js npm install angular --save
+* (1) 首先在demo/config.js加入require('angular');
+-------------------
+```
+window.$ =require('jquery');
+require('angular');
+require('./modules');
+```
+* (2) 然后在demo/modules/indexmodule.js 引入
+```
+var testmodule = require('./test/testmodule');
+var lodashmodule = require('./lodashmodule/lodashModule');
+require('./angularDemo/angularModule'); // 引入angular模块
+var indexmodule = module.exports = function(){
+	(function(){
+		indexmodule.init();
+	})();
+	return indexmodule;
+};
+indexmodule.init = function(){
+	console.log(123123123);
+	new testmodule();
+	new lodashmodule();
+};
+```
+* (3) 然后创建一下demo/modules/angularDemo/angularModule.js
+```
+require('angular');
+var testController = require('./testController.js')();
+var app = angular.module('test', []);
+app.controller('testController', testController);
+
+```
+* (4) 最后创建一下demo/modules/angularDemo/testController.js
+```
+module.exports = function() {
+	return ['$scope', function($scope) {
+		$scope.items = [{
+			title: 'Paint pots',
+			quantity: 8,
+			price: 3.95
+		}, {
+			title: 'Polka dots',
+			quantity: 17,
+			price: 12.95
+		}, {
+			title: 'Pebbles',
+			quantity: 5,
+			price: 6.95
+		}];
+	}];
+};
+```
+* (5) 修改views/demo/demo.html
+```
+<!doctype html>
+<html lang="en" ng-app='test'>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="http://127.0.0.1:3000/css/demo/index.css">
+</head>
+<body>
+	<div>1</div>
+	<div> <img src="http://127.0.0.1:3000/img/demo/cm-icon.png" alt="ss"></div>
+	<span>{{2+1}}</span>
+	    <div ng-controller='testController'>
+         <div ng-repeat='item in items'>
+            <span >{{item.title}}</span>
+            <input type="text" ng-model='item.quantity'>
+            <span>{{item.price | currency}}</span>
+            <span>{{item.price *item.quantity | currency}}</span>
+            <button ng-click='remove($index)'>Remove</button>
+            <button ng-click='tanchu($index)'>Click</button>
+        </div>
+    </div>
+	<script src='http://127.0.0.1:3000/js/demo/index.js'></script>
+</body>
+</html>
+```
+-------------------

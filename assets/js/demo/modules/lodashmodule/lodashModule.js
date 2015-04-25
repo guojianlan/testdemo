@@ -1,5 +1,4 @@
 var _ = require('lodash');
-var $ =require('jquery');
 var lodashtemplate = require('html!./lodashdemo.html');
 var lodashModule = module.exports = function(){
 	this.init();
@@ -23,9 +22,9 @@ p.beforeRender=function(){
 };
 p.templateRender = function(){
 	var compiled = _.template(lodashtemplate);
-	$('div').append(compiled({
-		test:111
-	}));
+	//$('div').append(compiled({
+	//	test:111
+	//}));
 }
 
 p.afterRender=function(){

@@ -1,5 +1,6 @@
 var testmodule = require('./test/testmodule');
 var lodashmodule = require('./lodashmodule/lodashModule');
+require('./angularDemo/angularModule');
 var indexmodule = module.exports = function(){
 	(function(){
 		indexmodule.init();
