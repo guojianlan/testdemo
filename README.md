@@ -289,13 +289,13 @@ gulp.task('demo-rev', function() { // 创建gulp任务（demo-rev）
 * (1) 首先在demo/config.js加入require('angular');
 -------------------
 ```
-window.$ =require('jquery');
-require('angular');
-require('./modules');
+window.$ =require('jquery'); // 引入全局的jq
+require('angular'); //引入全局的angular
+require('./modules'); // 引入modules/index.js
 ```
 * (2) 然后在demo/modules/indexmodule.js 引入
 ```
-var testmodule = require('./test/testmodule');
+var testmodule = require('./test/testmodule'); 
 var lodashmodule = require('./lodashmodule/lodashModule');
 require('./angularDemo/angularModule'); // 引入angular模块
 var indexmodule = module.exports = function(){
@@ -312,15 +312,15 @@ indexmodule.init = function(){
 ```
 * (3) 然后创建一下demo/modules/angularDemo/angularModule.js
 ```
-require('angular');
-var testController = require('./testController.js')();
-var app = angular.module('test', []);
-app.controller('testController', testController);
+require('angular'); // 引入angular
+var testController = require('./testController.js')(); //引入testController
+var app = angular.module('test', []); // 创建angular模块（test）
+app.controller('testController', testController); 增加控制器（testController）
 
 ```
 * (4) 最后创建一下demo/modules/angularDemo/testController.js
 ```
-module.exports = function() {
+module.exports = function() { // 返回一个angular实例
 	return ['$scope', function($scope) {
 		$scope.items = [{
 			title: 'Paint pots',
@@ -341,7 +341,7 @@ module.exports = function() {
 * (5) 修改views/demo/demo.html
 ```
 <!doctype html>
-<html lang="en" ng-app='test'>
+<html lang="en" ng-app='test'> // 使用angular渲染页面
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
@@ -351,8 +351,8 @@ module.exports = function() {
 	<div>1</div>
 	<div> <img src="http://127.0.0.1:3000/img/demo/cm-icon.png" alt="ss"></div>
 	<span>{{2+1}}</span>
-	    <div ng-controller='testController'>
-         <div ng-repeat='item in items'>
+	    <div ng-controller='testController'> //添加控制器
+         <div ng-repeat='item in items'> // 循环输出testController里面的items
             <span >{{item.title}}</span>
             <input type="text" ng-model='item.quantity'>
             <span>{{item.price | currency}}</span>
