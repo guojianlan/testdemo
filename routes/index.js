@@ -1,4 +1,6 @@
 var routesController = require('../routesController').static;
+var fs =require('fs');
+var Path = require('path');
 module.exports = function(server) {
 	server.route([{
 		method: 'GET',
@@ -20,5 +22,13 @@ module.exports = function(server) {
 		method: 'GET',
 		path: '/dist/{filePath*}',
 		handler: routesController.packFile
+	},{
+		method: 'GET',
+		path: '/h5/demo.json',
+		handler: function(req,rep){
+			var absPath = Path.join(__dirname,'../assets/js/h5/reactModule/demo.json')
+			rep.file(absPath);
+			
+		}
 	}]);
 }

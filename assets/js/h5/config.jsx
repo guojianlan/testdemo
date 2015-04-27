@@ -1,6 +1,7 @@
 var React = require('react');
 var CommentBox = require('./reactModule/CommentBox.jsx');
+
 React.render(
-	<CommentBox />,
-	document.getElementById('myDiv')
+		<CommentBox url="demo.json" pollInterval='2000' />, document.getElementById('myDiv')
 );
+
