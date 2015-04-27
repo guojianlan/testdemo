@@ -439,6 +439,7 @@ module.exports = React.createClass({
 });
 ```
 * (3) commentform
+```
 var React = require('react');
 
 module.exports = React.createClass({
@@ -448,4 +449,5 @@ module.exports = React.createClass({
 			);
 	}
 });
+```
 -------------------
