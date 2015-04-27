@@ -285,7 +285,7 @@ gulp.task('demo-rev', function() { // 创建gulp任务（demo-rev）
 
 ```
 -------------------
-11.使用angular.js npm install angular --save
+11. 使用angular.js npm install angular --save
 * (1) 首先在demo/config.js加入require('angular');
 -------------------
 ```
@@ -365,4 +365,87 @@ module.exports = function() { // 返回一个angular实例
 </body>
 </html>
 ```
+-------------------
+12. 使用react.js npm install react --save
+* (1) 创建h5/index.html
+-------------------
+```
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+  <meta http-equiv="x-dns-prefetch-control" content="on" />
+  <meta name="renderer" content="webkit">
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <style>
+	.commentBox{background:#ccc;}
+  </style>
+</head>
+<body>
+  	<div id='myDiv'></div>
+  	<script src='http://127.0.0.1:3000/js/h5/index.js'></script>
+</body>
+</html>
+```
+-------------------
+13. 创建js/h5/index.js 
+-------------------
+```
+require('./config.jsx');引入config.jsx
+```
+-------------------
+14. 创建js/h5/config.jsx
+-------------------
+```
+var React = require('react'); //引入react 
+var CommentBox = require('./reactModule/CommentBox.jsx'); //引入reactModule/CommentBox.jsx
+React.render( 
+	<CommentBox />,
+	document.getElementById('myDiv') // 把CommentBox加到mydiv中
+);
+```
+-------------------
+14. 创建js/h5/reactModule/CommentBox.jsx
+* (1) commentBox文件引入commentlist,和commentform文件
+-------------------
+```
+var React = require('react');  //引入react 
+var CommentList = require('./CommentList.jsx'); //引入reactModule/CommentList.jsx
+var CommentForm = require('./CommentForm.jsx'); //引入reactModule/CommentForm.jsx
+module.exports = React.createClass({
+		render: function() {
+			return ( <div className = "commentBox" >
+					<h1>comments</h1>
+				<CommentList/> //引入CommentList
+				<CommentForm/> //引入CommentForm
+				 </div>
+    );
+  }
+});
+```
+* (2) commentlist
+```
+var React = require('react');
+
+module.exports = React.createClass({
+	render:function(){
+		return (
+				<div className='commentList'>hello world!i am a commentList</div>
+			);
+	}
+});
+```
+* (3) commentform
+var React = require('react');
+
+module.exports = React.createClass({
+	render:function(){
+		return (
+				<div className='commentForm'>hello world!i am a commentForm</div>
+			);
+	}
+});
 -------------------
