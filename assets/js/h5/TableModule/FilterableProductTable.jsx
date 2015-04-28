@@ -10,11 +10,17 @@ var PRODUCTS = [
   {category: 'Electronics', price: '$199.99', stocked: true, name: 'Nexus 7'}
 ];
 module.exports = React.createClass({
+	getInitialState:function(){
+		return {
+			filterText: '',
+			inStockOnly: false
+		}
+	},
 	render:function(){
 		return (
 				<div>
-					<SearchBox />
-					<ProductTable products={PRODUCTS} />
+					<SearchBox filterText={this.state.filterText} inStockOnly={this.state.inStockOnly} />
+					<ProductTable products={PRODUCTS} filterText={this.state.filterText} inStockOnly={this.state.inStockOnly} />
 				</div>
 			);
 	}
