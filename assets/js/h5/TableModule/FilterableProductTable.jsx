@@ -16,10 +16,13 @@ module.exports = React.createClass({
 			inStockOnly: false
 		}
 	},
+	handleUserInput:function(filterText,inStockOnly){
+		this.setState({filterText:filterText,inStockOnly:inStockOnly});
+	},
 	render:function(){
 		return (
 				<div>
-					<SearchBox filterText={this.state.filterText} inStockOnly={this.state.inStockOnly} />
+					<SearchBox filterText={this.state.filterText} inStockOnly={this.state.inStockOnly} onUserInput={this.handleUserInput} />
 					<ProductTable products={PRODUCTS} filterText={this.state.filterText} inStockOnly={this.state.inStockOnly} />
 				</div>
 			);

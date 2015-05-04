@@ -8,6 +8,8 @@ var minifyCss = require('gulp-minify-css');
 var uglify = require('gulp-uglify');
 var fs = require('fs');
 var rev = require('gulp-rev');
+var path = require('path');
+var named = require('vinyl-named');
 gulp.task('clear', function() {
 	rimraf('./dist', function() {
 		console.log('clear success');
@@ -29,29 +31,58 @@ gulp.task('demo', function() {
 			.pipe(gulp.dest('./dist/css/demo/'));
 
 		gulp.src(['./assets/js/vendor/*.js'])
-		.pipe(uglify())
-		.pipe(gulp.dest('./dist/js/vendor/'));
-
-		if(fs.existsSync('./assets/js/demo/index.js')){
-			gulp.src('./assets/js/demo/index.js')
-			.pipe(webpack())
-			.pipe(rename('index.min.js'))
 			.pipe(uglify())
-			.pipe(gulp.dest('./dist/js/demo/'));
+			.pipe(gulp.dest('./dist/js/vendor/'));
+
+		if (fs.existsSync('./assets/js/demo/index.js')) {
+			gulp.src('./assets/js/demo/index.js')
+				.pipe(webpack())
+				.pipe(rename('index.min.js'))
+				.pipe(uglify())
+				.pipe(gulp.dest('./dist/js/demo/'));
 		}
 	});
 });
 gulp.task('demo-rev', function() {
-  // rev version
-  	gulp.src(['./dist/js/demo/*.js', './dist/css/demo/*.css'], {
-      base: './dist'
-    })
-    .pipe(rev())
-    .pipe(gulp.dest('./dist'))
-    .pipe(rev.manifest('./dist/manifest.json', {
-      base: './dist'
-    }))
-    .pipe(gulp.dest('./dist'));
+	// rev version
+	gulp.src(['./dist/js/demo/*.js', './dist/css/demo/*.css'], {
+		base: './dist'
+	})
+		.pipe(rev())
+		.pipe(gulp.dest('./dist'))
+		.pipe(rev.manifest('./dist/manifest.json', {
+			base: './dist'
+		}))
+		.pipe(gulp.dest('./dist'));
 });
 
-gulp.task('default',['demo']);
+gulp.task('act', function() {
+	var targetDir = gulp.env.dir.toString();
+	console.log(targetDir);
+	var sources = path.join('./assets/js/act/', targetDir, '/act.js');
+	//rimraf('./dist', function() {
+		gulp.src('./assets/js/vendor/*.js')
+			.pipe(uglify())
+			.pipe(gulp.dest('./dist/js/vendor/'));
+
+		if (targetDir && fs.existsSync(sources)) {
+			gulp.src(sources)
+				.pipe(named())
+				.pipe(webpack({
+					module: {
+						test: /\.jsx$/,
+						loaders: [{
+							loader: 'jsx-loader?insertPragma=React.DOM&harmony'
+						}],
+					},
+					resolve: {
+						extensions: ['', '.js', '.jsx']
+					}
+				}))
+				.pipe(uglify())
+				.pipe(gulp.dest(path.join('./dist/js/act/', targetDir)));
+		}
+	//});
+});
+
+gulp.task('default', ['demo']);
