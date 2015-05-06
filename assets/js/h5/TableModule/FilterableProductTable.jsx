@@ -1,6 +1,7 @@
-var React = require('react');
+var React = require('react/addons');
 var SearchBox = require('./searchBoxModule.jsx');
 var ProductTable = require('./ProductTable.jsx');
+var ReactCSSTransitionGroup  = React.addons.CSSTransitionGroup; 
 var PRODUCTS = [
   {category: 'Sporting Goods', price: '$49.99', stocked: true, name: 'Football'},
   {category: 'Sporting Goods', price: '$9.99', stocked: true, name: 'Baseball'},
@@ -24,6 +25,9 @@ module.exports = React.createClass({
 				<div>
 					<SearchBox filterText={this.state.filterText} inStockOnly={this.state.inStockOnly} onUserInput={this.handleUserInput} />
 					<ProductTable products={PRODUCTS} filterText={this.state.filterText} inStockOnly={this.state.inStockOnly} />
+					<ReactCSSTransitionGroup transitionName="example">
+						<div>123</div>
+					</ReactCSSTransitionGroup>
 				</div>
 			);
 	}

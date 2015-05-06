@@ -5,6 +5,7 @@ var act = module.exports = function() {
 	this.i = 0;
 	this.timer = null;
 	this.init();
+	this.desc = '辣妈寻宝 用嗳呵护';
 	new iscroll('#wrapper', {
 		scrollX: true,
 		scrollY: false,
@@ -49,6 +50,38 @@ p.init = function() {
 		if (clicksize == 5) {
 			clearInterval(self.timer);
 			self.sendCont();
+			var ms = self.i % 60;
+			var s = parseInt(self.i / 60 % 60);
+			var M = parseInt(self.i / 3600);
+			self.desc = '我用了'+M+'分'+s+'秒'+ms+'毫秒完成的嗳呵寻宝，不服来挑战';
+			wx.ready(function() {
+		// 1 判断当前版本是否支持指定 JS 接口，支持批量判断
+		var fullimg = "http://s07.lmbang.com/M00/BB/AF/DpgiA1VCBXSAULYfAAAklMnPjX4703.jpg";
+		wx.checkJsApi({
+			jsApiList: [
+				'onMenuShareTimeline',
+				'onMenuShareAppMessage'
+			],
+			success: function(res) {
+				//     alert(JSON.stringify(res));
+			}
+		});
+
+		var shareData = {
+			title: "辣妈寻宝 用嗳呵护",
+			desc: self.desc,
+			link: 'http://ad.lmbang.com/html/aihe/main.html',
+			imgUrl: fullimg
+		};
+		wx.onMenuShareAppMessage(shareData);
+		wx.onMenuShareTimeline(shareData);
+		wx.onMenuShareQQ(shareData);
+		wx.onMenuShareWeibo(shareData);
+
+	});
+	wx.error(function(res) {
+		//alert(res.errMsg);
+	});
 		}
 	});
 	self.autoTime();
@@ -144,12 +177,13 @@ p.sendCont = function() {
 
 };
 p.wx = function() {
+	var self  =this;
 	var appId = '';
 	var timestamp = '';
 	var nonceStr = '';
 	var signature = '';
 	$.get("/wx/getshareconfig/", {
-		url: 'http://ad.lmbang.com/html/aihe/main.html'
+		url: 'http://ad.lmbang.com/html/aihe/index.html'
 	}, function(json) {
 		if (json.ret == "1") {
 			appId = json.data.appId;
@@ -219,7 +253,7 @@ p.wx = function() {
 
 		var shareData = {
 			title: "辣妈寻宝 用嗳呵护",
-			desc: "辣妈寻宝 用嗳呵护",
+			desc: self.desc,
 			link: 'http://ad.lmbang.com/html/aihe/main.html',
 			imgUrl: fullimg
 		};
@@ -227,6 +261,7 @@ p.wx = function() {
 		wx.onMenuShareTimeline(shareData);
 		wx.onMenuShareQQ(shareData);
 		wx.onMenuShareWeibo(shareData);
+
 	});
 	wx.error(function(res) {
 		//alert(res.errMsg);
