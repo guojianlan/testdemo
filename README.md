@@ -451,3 +451,18 @@ module.exports = React.createClass({
 });
 ```
 -------------------
+15. 引入gulp-ruby-sass
+* (1) npm install gulp-ruby-sass --save
+-------------------
+```
+最后往gulpfile.js加入这句
+gulp.task('sasstest',function(){
+	return sass('./assets/css/demo/')
+        .on('error', function (err) {
+            console.error('Error!', err.message);
+        })
+        .pipe(rename('test.min.css'))
+        .pipe(gulp.dest('./assets/css/demo/'));
+});
+```
+-------------------

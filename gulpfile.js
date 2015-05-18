@@ -10,6 +10,7 @@ var fs = require('fs');
 var rev = require('gulp-rev');
 var path = require('path');
 var named = require('vinyl-named');
+var sass = require('gulp-ruby-sass');
 gulp.task('clear', function() {
 	rimraf('./dist', function() {
 		console.log('clear success');
@@ -85,4 +86,12 @@ gulp.task('act', function() {
 	//});
 });
 
+gulp.task('sasstest',function(){
+	return sass('./assets/css/demo/')
+        .on('error', function (err) {
+            console.error('Error!', err.message);
+        })
+        .pipe(rename('test.min.css'))
+        .pipe(gulp.dest('./assets/css/demo/'));
+});
 gulp.task('default', ['demo']);
