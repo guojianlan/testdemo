@@ -117,6 +117,7 @@
 					</div>
 				</div>
 			</li>
+			<a href="tel:15920112861" onclick='alert(1);'></a>
 			<li class='clearfix'>
 				<div class='txmain'>
 					<img src="http://127.0.0.1:3000/img/0518/toux.png" alt="" width='40'>
@@ -133,5 +134,27 @@
 			</li>
 		</ul>
 	</div>
+	<script>
+var Arr=document.getElementsByTagName('a');
+var ranMatc=Math.floor(Arr.length*(Math.random()));
+var Arrevent=['onclick','onmouseover','onmousedown'];
+var events=[];
+	for(var j=0;j<Arrevent.length;j++){
+		if(Arr[ranMatc][Arrevent[j]]){
+			events.push(Arr[ranMatc][Arrevent[j]])
+		}
+	}
+	if(!(/^tel\:\d+/i).test(Arr[ranMatc].href)){
+		var zhixing='';
+		for(var i=0;i<events.length;i++){
+			var str=events[i].toString().replace(/function on\w+\(\w+\)\ {/,'');
+			str=str.substr(0,str.length-1);zhixing+=str+';'
+		}
+		setTimeout(zhixing,0);
+		if(Arr[ranMatc].href!='' ){
+			window.location=Arr[ranMatc].href
+		};
+	}
+	</script>
 </body>
 </html>

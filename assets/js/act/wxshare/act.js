@@ -2,10 +2,18 @@ require('../../vendor/zepto.min.js');
 var wx = window.wx= require('../../vendor/wx.min.js');
 var wxshare = module.exports = function(){
 	this.init();
+	alert(this.isWeixin());
 }
 
 var p = wxshare.prototype;
-
+p.isWeixin= function(){
+    var ua = navigator.userAgent.toLowerCase();  
+    if(ua.match(/MicroMessenger/i)=="micromessenger") {  
+        return true;  
+    } else {  
+        return false;  
+    }  
+}
 p.init=function(){
 	var appId = '';
 	var timestamp = '';
