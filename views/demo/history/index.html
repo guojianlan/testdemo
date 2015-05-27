@@ -15,63 +15,81 @@
     <meta name="description" content="" />
 	<title>1page</title>
 	<style>
-		{width:100%;}
+		body{margin:0;padding:0;font:12px/1.5 'Helvetica Neue',Helvetica,Arial,微软雅黑,sans-serif;color:#7f7f7f;}
+		input{font-family:微软雅黑,arial;}
+		div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,blockquote,p{padding:0;margin:0;}
+		table,td,tr,th{font-size:12px;}
+		ol,ul{list-style:none;}
+		li{list-style-type:none;}
+		img{vertical-align:top;border:0;}
+		h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:normal;}
+		em,i{font-style:normal;}
+		/*链接样式*/
+		a{color:#666;text-decoration:none;}
+		a:visited{text-decoration:none;}
+		a:hover{color:#ff5b73;text-decoration:none;}
+		a:active{color:#ff5b73;}
+		/*字体样式*/
+		.feB{font-weight:bold;}
+		.fe12{font-size:12px;}
+		.fe14{font-size:14px;}
+		.fe16{font-size:16px;}
+		.fe18{font-size:18px;}
+		.fe20{font-size:20px;}
+		.fe24{font-size:24px;}
+		/*字体颜色*/
+		.cGreen,.cGreen:visited,.cGreen a,.green{color:#6b9333;}
+		.cBlue,.cBlue:visited,.cBlue a{color:#1E50A2;}
+		.cRed,.cRed:visited,.cRed a,a.cRed{color:#ff5c75;}
+		.cDRed,.cDRed:visited,.cDRed a{color:#ba2636;}
+		.cDRed a:hover,a.cDRed:hover{color:#ba2636;}
+		/*框架布局*/
+		.w{clear:both;width:1000px;margin:0 auto;}
+		.fl{float:left;}
+		.fr{float:right;}
+		.ovH{overflow:hidden;}
+		.poR{position:relative;}
+		/*间距*/
+		.mt10{margin-top:10px;}.mr10{margin-right:10px;}.mb10{margin-bottom:10px;}.ml10{margin-left:10px;}
+		.mt20{margin-top:20px;}.mr20{margin-right:20px;}.mb20{margin-bottom:20px;}.ml20{margin-left:20px;}
+		.mt30{margin-top:30px;}.mr30{margin-right:30px;}.mb30{margin-bottom:30px;}.ml30{margin-left:30px;}
+		.mt40{margin-top:40px;}.mr40{margin-right:40px;}.mb40{margin-bottom:40px;}.ml40{margin-left:40px;}
+		/*清除浮动*/
+		.clearfix:after {visibility: hidden;display: block;font-size: 0;content: " ";clear: both;height: 0;}
+		.clearfix { display: inline-table; }
+		/* Hides from IE-mac \*/
+		* html .clearfix { height: 1%; }
+		.clearfix { display: block; }
+		#in{width:400px;float:left;height:200px;border:1px solid #eee; }
+		#out{width:400px;float:left;height:200px;border:1px solid #eee;margin-left:30px; overflow: auto;}
 	</style>
 	<script src='http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js'></script>
 </head>
 <body>
-<div id='parent'>
-<div>1</div>
-<div>2</div>
-<div>3</div>
-<div>4</div>
+<div class='box clearfix'>
+	<ul id='in'>
+		
+	</ul>
+	<dl id='out'>
+		<dd class='clearfix'><input type="text" style='float:left;'>
+			<div style='float:left;'>搜索</div>
+		</dd>
+		<dt><span>1</span> <i>添加</i></dt>
+		<dt><span>2</span> <i>添加</i></dt>
+		<dt><span>3</span> <i>添加</i></dt>
+		<dt><span>4</span> <i>添加</i></dt>
+		<dt><span>51</span> <i>添加</i></dt>
+	</dl>
 </div>
 	<script>
-		var $adiv = $('#parent div');
-		var  a2 = $adiv.eq(2);
-		var  a0 = $adiv.eq(0);
-			/*var imgPath = "images/";
-			var loadImage = function(path, callback){
-   				var img = new Image();
-   				img.onload = function(){
-        			img.onload = null;
-        			callback(path);
-    			}
-   				img.src = path;
-			}
-			function removeElement(_element){
-			     var _parentElement = _element.parentNode;
-			     if(_parentElement){
-			            _parentElement.removeChild(_element);  
-			     }
-			}
-			var loadingPage = (function(){
-			    var sourceArr = ["lmb.jpg"];
-			    for (var i = 0; i < sourceArr.length; i++) {
-			        sourceArr[i] = (imgPath + sourceArr[i]);
-			    };
-			    //添加数组
-			    var imgLoader = function(imgs, callback){
-			        var len = imgs.length, i = 0;
-			        //如果还有长度
-			        while(imgs.length){
-			            loadImage(imgs.shift(), function(path){
-			            	//调用loadImage
-			                callback(path, ++i, len);
-			            });
-			        }
-			    }
-			    imgLoader(sourceArr, function(path, curNum, total){
-			        var percent = curNum/total;
-			        if(percent == 1){
-			            //loading页隐藏
-			            var domLoading = document.querySelector('.load');
-			            removeElement(domLoading);
-			            document.getElementById("main").style.display = "block";
-			        	//setTimeout(gameLoading,500);
-			        }
-			    });
-			})();*/
+		$('#out').on('click','i', function(event) {
+			event.preventDefault();
+			$('#in').append('<li><span>'+$(this).prev().text()+'</span> <i>删除</i></li>')
+		});
+		$('#in').on('click','i', function(event) {
+			event.preventDefault();
+			$(this).parent().remove();
+		});
 	</script>
 </body>
 </html>
