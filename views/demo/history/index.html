@@ -8,7 +8,7 @@
 	<meta http-equiv='x-dns-prefetch-control' content='on' />
 	<!-- dns预解释 -->
 	<meta name='renderer' content='webkit' />
-	<!-- 双核浏览器指定使用webkit渲染页面 -->
+		<!-- 双核浏览器指定使用webkit渲染页面 -->
 	<meta name='viewport' content='width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no' />
 	<!--定义设备宽度等于网页宽度，初始化1倍，最大1倍，不允许缩放  -->
 	<meta name="keywords" content="" />
@@ -17,13 +17,61 @@
 	<style>
 		{width:100%;}
 	</style>
-	<script src="http://192.168.3.89:1224/target/target-script-min.js#anonymous"></script>
+	<script src='http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js'></script>
 </head>
 <body>
-	<div style='position:relative;left:0;top:0;'>22</div>
-	<div >1<div id='ss'>2<div style='position:absolute;left:0;top:0;'>3</div></div></div>
+<div id='parent'>
+<div>1</div>
+<div>2</div>
+<div>3</div>
+<div>4</div>
+</div>
 	<script>
-		document.getElementById('ss').innerHTML='';
+		var $adiv = $('#parent div');
+		var  a2 = $adiv.eq(2);
+		var  a0 = $adiv.eq(0);
+			/*var imgPath = "images/";
+			var loadImage = function(path, callback){
+   				var img = new Image();
+   				img.onload = function(){
+        			img.onload = null;
+        			callback(path);
+    			}
+   				img.src = path;
+			}
+			function removeElement(_element){
+			     var _parentElement = _element.parentNode;
+			     if(_parentElement){
+			            _parentElement.removeChild(_element);  
+			     }
+			}
+			var loadingPage = (function(){
+			    var sourceArr = ["lmb.jpg"];
+			    for (var i = 0; i < sourceArr.length; i++) {
+			        sourceArr[i] = (imgPath + sourceArr[i]);
+			    };
+			    //添加数组
+			    var imgLoader = function(imgs, callback){
+			        var len = imgs.length, i = 0;
+			        //如果还有长度
+			        while(imgs.length){
+			            loadImage(imgs.shift(), function(path){
+			            	//调用loadImage
+			                callback(path, ++i, len);
+			            });
+			        }
+			    }
+			    imgLoader(sourceArr, function(path, curNum, total){
+			        var percent = curNum/total;
+			        if(percent == 1){
+			            //loading页隐藏
+			            var domLoading = document.querySelector('.load');
+			            removeElement(domLoading);
+			            document.getElementById("main").style.display = "block";
+			        	//setTimeout(gameLoading,500);
+			        }
+			    });
+			})();*/
 	</script>
 </body>
 </html>
