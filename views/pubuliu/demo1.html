@@ -1,0 +1,361 @@
+<!doctype html>
+<html>
+<head>
+	<meta http-equiv='Content-Type' content='text/html;charset=utf-8' />
+	<!--使用utf-8-->
+	<meta http-equiv='X-UA-Compatible' content='IE=Edge,chrome=1' />
+	<!-- 使用最新模式渲染页面 -->
+	<meta http-equiv='x-dns-prefetch-control' content='on' />
+	<!-- dns预解释 -->
+	<meta name='renderer' content='webkit' />
+		<!-- 双核浏览器指定使用webkit渲染页面 -->
+	<meta name='viewport' content='width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no' />
+	<!--定义设备宽度等于网页宽度，初始化1倍，最大1倍，不允许缩放  -->
+	<meta name="keywords" content="" />
+    <meta name="description" content="" />
+	<title>瀑布流</title>
+	<style>
+		*{padding:0;margin:0;}
+		#container{position: relative;}
+		.box{padding:5px;float: left;}
+		.box_img{padding:5px;border:1px solid #ccc; box-shadow: 0 0 5px #ccc;border-radius: 5px;}
+		.box_img img{width:150px;height:auto;}
+	</style>
+</head>
+<body>
+	<div id='container'>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://a1.att.hudong.com/37/36/01300000088552120591365472910.gif" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://img3.redocn.com/20111108/20111103_22b817f0736b6738374cai9Y1qG1R69N.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://img1.mypsd.com.cn/20101129/Mypsd_2111_201011252127320026B.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://a3.att.hudong.com/75/30/01300000928556128114305369905.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://www.veerchina.com/images/front/v/pic2/90/1a/2167128625.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://img.taopic.com/uploads/allimg/130803/318758-130P30P24399.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://img04.tooopen.com/images/20130622/tooopen_14575732.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://a3.att.hudong.com/75/30/01300000928556128114305369905.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://www.veerchina.com/images/front/v/pic2/90/1a/2167128625.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://img.taopic.com/uploads/allimg/130803/318758-130P30P24399.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://img.taopic.com/uploads/allimg/130803/318758-130P30P24399.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://img04.tooopen.com/images/20130622/tooopen_14575732.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://a3.att.hudong.com/75/30/01300000928556128114305369905.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://www.veerchina.com/images/front/v/pic2/90/1a/2167128625.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://img.taopic.com/uploads/allimg/130803/318758-130P30P24399.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://img.taopic.com/uploads/allimg/130803/318758-130P30P24399.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://img04.tooopen.com/images/20130622/tooopen_14575732.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://a3.att.hudong.com/75/30/01300000928556128114305369905.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://www.veerchina.com/images/front/v/pic2/90/1a/2167128625.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://img.taopic.com/uploads/allimg/130803/318758-130P30P24399.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://img.taopic.com/uploads/allimg/130803/318758-130P30P24399.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://img04.tooopen.com/images/20130622/tooopen_14575732.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://a3.att.hudong.com/75/30/01300000928556128114305369905.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://www.veerchina.com/images/front/v/pic2/90/1a/2167128625.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://img.taopic.com/uploads/allimg/130803/318758-130P30P24399.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://img.taopic.com/uploads/allimg/130803/318758-130P30P24399.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://img04.tooopen.com/images/20130622/tooopen_14575732.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://a3.att.hudong.com/75/30/01300000928556128114305369905.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://www.veerchina.com/images/front/v/pic2/90/1a/2167128625.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://img.taopic.com/uploads/allimg/130803/318758-130P30P24399.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://img.taopic.com/uploads/allimg/130803/318758-130P30P24399.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://img04.tooopen.com/images/20130622/tooopen_14575732.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://a3.att.hudong.com/75/30/01300000928556128114305369905.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://www.veerchina.com/images/front/v/pic2/90/1a/2167128625.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://img.taopic.com/uploads/allimg/130803/318758-130P30P24399.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://img.taopic.com/uploads/allimg/130803/318758-130P30P24399.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://img04.tooopen.com/images/20130622/tooopen_14575732.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://a3.att.hudong.com/75/30/01300000928556128114305369905.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://www.veerchina.com/images/front/v/pic2/90/1a/2167128625.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://img.taopic.com/uploads/allimg/130803/318758-130P30P24399.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://img.taopic.com/uploads/allimg/130803/318758-130P30P24399.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://img04.tooopen.com/images/20130622/tooopen_14575732.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://a3.att.hudong.com/75/30/01300000928556128114305369905.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://www.veerchina.com/images/front/v/pic2/90/1a/2167128625.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://img.taopic.com/uploads/allimg/130803/318758-130P30P24399.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://img.taopic.com/uploads/allimg/130803/318758-130P30P24399.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://img04.tooopen.com/images/20130622/tooopen_14575732.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://a3.att.hudong.com/75/30/01300000928556128114305369905.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://www.veerchina.com/images/front/v/pic2/90/1a/2167128625.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="box_img">
+				<img src="http://img.taopic.com/uploads/allimg/130803/318758-130P30P24399.jpg" alt="">
+			</div>
+		</div>
+	</div>
+	<script>
+		var imgData = {'data':[{'src':'http://img.taopic.com/uploads/allimg/130803/318758-130P30P24399.jpg'}
+								,{'src':'http://www.veerchina.com/images/front/v/pic2/90/1a/2167128625.jpg'}
+								,{'src':'http://img.taopic.com/uploads/allimg/130803/318758-130P30P24399.jpg'}
+								,{'src':'http://a3.att.hudong.com/75/30/01300000928556128114305369905.jpg'}
+								,{'src':'http://img04.tooopen.com/images/20130622/tooopen_14575732.jpg'}
+								,{'src':'http://img.taopic.com/uploads/allimg/130803/318758-130P30P24399.jpg'}
+								,{'src':'http://www.veerchina.com/images/front/v/pic2/90/1a/2167128625.jpg'}]}
+		function imgLocation(parent,content){
+			//将parent下的content取出
+			var cparent = document.getElementById(parent);
+			var ccontent = getChildElement(cparent,content);
+			var imgWidth = ccontent[0].offsetWidth;
+			var cols = Math.floor((document.documentElement.clientHeight || document.body.clientHeight)/imgWidth);
+			cparent.style.cssText = 'width:'+(cols*imgWidth)+'px;margin:0 auto;'
+			var boxHeight = [];
+			for (var i = 0; i < ccontent.length; i++) {
+				if(i<cols){
+					boxHeight[i] = ccontent[i].offsetHeight;
+				}else{
+					//获取最小的高度
+					var minheigh = Math.min.apply(null,boxHeight);
+					var minHeightLocation = getMinHeightLoCation(boxHeight,minheigh);
+					ccontent[i].style.position='absolute';
+					ccontent[i].style.top=minheigh+'px';
+					ccontent[i].style.left=ccontent[minHeightLocation].offsetLeft+'px';
+					boxHeight[minHeightLocation]+=ccontent[i].offsetHeight;
+					
+				}
+			};
+			
+		}
+		function getChildElement(parent,content){
+			var contentArr = [];
+			var allContent = parent.getElementsByTagName('*');
+			for(var i=0;i<allContent.length;i++){
+				if(allContent[i].className === content){
+					contentArr.push(allContent[i]);
+				}
+			}
+			return contentArr;
+		}
+		function getMinHeightLoCation(boxHeightArr,minHeight){
+			for (var i = 0; i < boxHeightArr.length; i++) {
+				if(boxHeightArr[i] === minHeight){
+					return i;
+				}
+			};
+		}
+		window.onload=function(){
+			imgLocation('container','box');
+			var pageHeight = document.documentElement.clientHeight || document.body.clientHeight;
+			window.onscroll =function(){
+				if(checkFlag(pageHeight)){
+					var cparent = document.getElementById('container');
+					var fragment = document.createDocumentFragment();
+					for (var i = 0; i < imgData.data.length; i++) {
+						var cccotent = document.createElement('div');
+						cccotent.className = 'box';
+						cccotent.innerHTML = '<div class="box_img"><img src="'+imgData.data[i].src+'" alt=""></div>';
+						fragment.appendChild(cccotent);
+					};
+					
+					cparent.appendChild(fragment);
+					imgLocation('container','box');
+				}
+			}
+		}
+
+		function checkFlag(pageHeight){
+			var cparent = document.getElementById('container');
+			var ccontent = getChildElement(cparent,'box');
+			var lastContentHeight = ccontent[ccontent.length-1].offsetTop+ccontent[ccontent.length-1].offsetHeight/2;
+			var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+			if(scrollTop+pageHeight>=lastContentHeight){
+				return true;
+			}else{
+				return false;
+			}
+			
+		}
+	</script>	
+</body>
+</html>
