@@ -2,8 +2,7 @@ var Hapi = require('hapi');
 var Path = require('path');
 var server = new Hapi.Server();
 server.connection({
-	port: 3000,
-	hostname:'http:127.0.0.1'
+	port: 3000
 });
 
 require('./routes')(server);
