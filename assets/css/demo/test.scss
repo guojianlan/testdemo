@@ -1,4 +1,6 @@
 $fontSize: 12px;
-body{
-    font-size:$fontSize;
-}
+$colorf:#f0f;
+$width:110px;
+
+body{font-size:$fontSize;background:$colorf;width:$width;}
+@import "test2.scss";

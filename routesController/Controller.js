@@ -15,6 +15,7 @@ module.exports.htmlFile = function(req, rep) {
 module.exports.cssFile = function(req, rep) {
 	var cssPath = req.params.cssPath;
 	var absPath = Path.join(__dirname, '../assets/css/' + cssPath);
+	console.log(absPath);
 	var isExit = fs.existsSync(absPath);
 	if (isExit) {
 		var ReadStream = fs.createReadStream(absPath);

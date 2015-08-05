@@ -87,11 +87,34 @@ gulp.task('act', function() {
 });
 
 gulp.task('sasstest',function(){
-	return sass('./assets/css/demo/')
+	return sass('./assets/css/demo/test.scss')
         .on('error', function (err) {
             console.error('Error!', err.message);
         })
-        .pipe(rename('test.min.css'))
+        .pipe(concat('test.min.css'))
+        //.pipe(rename())
         .pipe(gulp.dest('./assets/css/demo/'));
+});
+gulp.task('sass:watch', function () {
+  gulp.watch('./assets/css/demo/*.scss', ['sasstest']);
+});
+gulp.task('h5-react', function() {
+		if (fs.existsSync('./assets/js/h5/TableModule/index.js')) {
+			gulp.src('./assets/js/h5/TableModule/index.js')
+				.pipe(webpack({
+					module: {
+						test: /\.jsx$/,
+						loaders: [{
+							loader: 'jsx-loader?insertPragma=React.DOM&harmony'
+						}],
+					},
+					resolve: {
+						extensions: ['', '.js', '.jsx']
+					}
+				}))
+				.pipe(rename('index.min.js'))
+				.pipe(uglify())
+				.pipe(gulp.dest('./dist/js/h5/TableModule/'));
+		}
 });
 gulp.task('default', ['demo']);
